@@ -1,11 +1,11 @@
 require 'rails_helper'
-# require 'RandomData'
+include RandomData
 
 RSpec.describe Post, type: :model do
   
    # #3
-   let(:topic) { Topic.create!(name: "aaaaaa", description: "aaaaaa") }
-   let(:post) { topic.posts.create!(title: "aaaaaa", body: "aaaaaa") }
+   let(:topic) { Topic.create!(name: RandomData.random_sentence, description: RandomData.random_paragraph) }
+   let(:post) { topic.posts.create!(title: RandomData.random_sentence, body: RandomData.random_paragraph) }
  
    it { should belong_to(:topic) }
 
