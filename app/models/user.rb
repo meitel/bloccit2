@@ -19,4 +19,5 @@ class User < ActiveRecord::Base
 
  # #7
    has_secure_password
+   
 end
