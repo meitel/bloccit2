@@ -2,7 +2,7 @@ class User < ActiveRecord::Base
   has_many :posts
    # #2
    before_save { self.email = email.downcase }
-
+   before_save { self.role ||= :member }
  # #3
    EMAIL_REGEX = /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i
 
@@ -21,4 +21,5 @@ class User < ActiveRecord::Base
  # #7
    has_secure_password
    
+   enum role: [:member, :admin]
 end

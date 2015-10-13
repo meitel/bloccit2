@@ -1,8 +1,8 @@
 class PostsController < ApplicationController
   
   before_action :require_sign_in, except: :show
-
-  def show
+  before_action :authorize_user, except: [:show, :new, :create]
+   def show
     @post = Post.find(params[:id])
   end
 
@@ -60,9 +60,18 @@ def update
 
 # remember to add private methods to the bottom of the file. Any method defined below private, will be private.
    private
- 
    def post_params
      params.require(:post).permit(:title, :body)
+   end
+
+
+   def authorize_user
+     post = Post.find(params[:id])
+ # #11
+     unless current_user == post.user || current_user.admin?
+       flash[:error] = "You must be an admin to do that."
+       redirect_to [post.topic, post]
+     end
    end
 
 end
