@@ -4,6 +4,13 @@ include RandomData
 RSpec.describe Topic, type: :model do
      let(:topic) { Topic.create!(name: RandomData.random_sentence, description: RandomData.random_paragraph) }
 
+
+
+   it { should have_many(:posts) }
+ # #10
+   it { should have_many(:labelings) }
+ # #11
+   it { should have_many(:labels).through(:labelings) }
  
    describe "attributes" do
      it "should respond to name" do
