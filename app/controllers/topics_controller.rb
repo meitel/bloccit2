@@ -5,6 +5,8 @@ class TopicsController < ApplicationController
  # #8
    before_action :authorize_user, except: [:index, :show]
 
+   before_action :authorize_moderator, only: [:update]
+
   def index
     @topics = Topic.all
   end

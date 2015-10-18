@@ -4,6 +4,13 @@ class ApplicationController < ActionController::Base
   protect_from_forgery with: :exception
   include SessionsHelper
 
+  def authorize_moderator
+    if current_user != "moderator"
+      flash[:error] = "You are not a moderator and don't have permission."
+      redirect_to root_path
+    end
+  end
+
     private
  # #10
    def require_sign_in
