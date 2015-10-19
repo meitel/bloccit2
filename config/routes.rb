@@ -19,6 +19,9 @@ resources :labels, only: [:show]
  resources :sessions, only: [:new, :create, :destroy]
 
  get 'about' => 'welcome#about'
+ post '/users/confirm' => 'users#confirm'
+ post 'users/new' => 'users#new'
+ 
  root to: 'welcome#index'
 
 end
