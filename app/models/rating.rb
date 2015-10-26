@@ -1,9 +1,10 @@
 class Rating < ActiveRecord::Base
   enum severity: [ :PG, :PG13, :R ]
 
-  has_many :topics
-  has_many :posts
   belongs_to :rateable, polymorphic: true
+  has_many :topics, source: :rateable, source_type: :Topic
+  has_many :posts, source: :rateable, source_type: :Posts
+  
 
 
   def self.update_rating(rating)
